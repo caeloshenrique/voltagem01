@@ -3,226 +3,545 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voltagem Energia - Soluções em Energia Sustentável</title>
+    <title>Voltagem Energia | Soluções Energéticas Inteligentes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #006400; /* Verde escuro */
-            --secondary: #32CD32; /* Verde lima */
-            --accent: #228B22; /* Verde floresta */
-            --light: #F5FFF5; /* Verde muito claro */
-            --dark: #013220; /* Verde muito escuro */
+            --primary: #003d29; /* Verde escuro sofisticado */
+            --secondary: #00c896; /* Verde água moderno */
+            --accent: #ff6b35; /* Laranja para contrastes */
+            --light: #f8fbfa; /* Branco esverdeado claro */
+            --dark: #0a1e17; /* Verde quase preto */
+            --text: #2d3a36; /* Cinza esverdeado para texto */
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            color: var(--dark);
-            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
             background-color: var(--light);
+            overflow-x: hidden;
         }
         
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
         }
         
         .container {
             width: 90%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         
-        .header-content {
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        header.scrolled {
+            padding: 1rem 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
+            font-weight: 700;
+            color: var(--primary);
         }
         
-        .logo span {
+        .logo-icon {
             color: var(--secondary);
+            font-size: 2rem;
         }
         
         nav ul {
             display: flex;
             list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 1.5rem;
+            gap: 2rem;
         }
         
         nav ul li a {
-            color: white;
-            text-decoration: none;
+            position: relative;
             font-weight: 500;
-            transition: color 0.3s;
             padding: 0.5rem 0;
-            border-bottom: 2px solid transparent;
+            transition: var(--transition);
         }
         
-        nav ul li a:hover {
-            color: var(--secondary);
-            border-bottom: 2px solid var(--secondary);
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
         }
         
-        .hero {
-            background: linear-gradient(rgba(0, 50, 0, 0.7), rgba(0, 50, 0, 0.7)), url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background-color: var(--secondary);
             color: white;
-            padding: 5rem 0;
-            text-align: center;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 200, 150, 0.3);
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 150, 0.4);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 60, 40, 0.9) 0%, rgba(0, 200, 150, 0.7) 100%);
+            z-index: 1;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 700px;
         }
         
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
         
         .hero p {
             font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
         }
         
         .btn {
             display: inline-block;
-            background-color: var(--secondary);
-            color: var(--dark);
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            border: 2px solid transparent;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
         }
         
-        .btn:hover {
-            background-color: transparent;
-            color: var(--secondary);
-            border: 2px solid var(--secondary);
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 150, 0.4);
+        }
+        
+        .btn-primary:hover {
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 150, 0.5);
         }
         
-        section {
-            padding: 4rem 0;
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary);
-            position: relative;
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: white;
         }
         
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--secondary);
-            margin: 0.5rem auto 0;
-        }
-        
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .service-card {
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
             background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
+        }
+        
+        .section-header {
             text-align: center;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 100, 0, 0.1);
-            border-top: 4px solid var(--secondary);
+            margin-bottom: 5rem;
         }
         
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 100, 0, 0.2);
-        }
-        
-        .service-card i {
+        .section-header h2 {
             font-size: 2.5rem;
             color: var(--primary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         
-        .service-card h3 {
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text);
+            opacity: 0.8;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 15px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            opacity: 0;
+            z-index: -1;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-card:hover .feature-icon,
+        .feature-card:hover h3,
+        .feature-card:hover p {
+            color: white;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--primary);
+            transition: var(--transition);
         }
         
+        .feature-card p {
+            transition: var(--transition);
+        }
+        
+        /* About Section */
         .about {
-            background-color: white;
+            padding: 6rem 0;
+            background-color: var(--light);
         }
         
-        .about-content {
+        .about-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 5rem;
             align-items: center;
         }
         
         .about-img {
-            border-radius: 8px;
+            position: relative;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
         .about-img img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.5s;
+            transition: var(--transition);
         }
         
         .about-img:hover img {
             transform: scale(1.05);
         }
         
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background-color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .service-card {
+            background-color: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 2rem;
+        }
+        
+        .service-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .service-content p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--secondary);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .service-link i {
+            margin-left: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .service-link:hover {
+            color: var(--primary);
+        }
+        
+        .service-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1516937944024-0d2e6b5e2f66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .cta-container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        
+        /* Contact Section */
         .contact {
-            background: linear-gradient(135deg, var(--primary), var(--dark));
-            color: white;
+            padding: 6rem 0;
+            background-color: var(--light);
         }
         
-        .contact .section-title {
-            color: white;
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
         }
         
-        .contact .section-title::after {
-            background-color: var(--secondary);
+        .contact-info h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .contact-details {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-top: 0.3rem;
         }
         
         .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 8px;
-            backdrop-filter: blur(5px);
+            background-color: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
         
         .form-group {
@@ -239,244 +558,551 @@
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.2);
         }
         
         .form-group textarea {
-            height: 150px;
+            min-height: 150px;
             resize: vertical;
         }
         
+        .submit-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary);
+        }
+        
+        /* Footer */
         footer {
             background-color: var(--dark);
             color: white;
-            padding: 3rem 0 1rem;
+            padding: 5rem 0 2rem;
         }
         
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
         
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
+        .footer-col h3 {
+            font-size: 1.3rem;
             margin-bottom: 1.5rem;
-            padding: 0 1rem;
-        }
-        
-        .footer-section h3 {
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
             position: relative;
-            padding-bottom: 0.5rem;
+            padding-bottom: 1rem;
         }
         
-        .footer-section h3::after {
+        .footer-col h3::after {
             content: '';
             position: absolute;
-            left: 0;
             bottom: 0;
+            left: 0;
             width: 50px;
             height: 2px;
             background-color: var(--secondary);
         }
         
-        .social-icons a {
-            display: inline-block;
-            color: white;
-            margin-right: 1rem;
-            font-size: 1.5rem;
-            transition: color 0.3s;
+        .footer-col p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
         }
         
-        .social-icons a:hover {
+        .footer-links {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
             color: var(--secondary);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
             transform: translateY(-3px);
         }
         
-        .copyright {
+        .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 1.5rem;
+            padding-top: 2rem;
             text-align: center;
+            opacity: 0.7;
+            font-size: 0.9rem;
         }
         
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav ul {
-                margin-top: 1rem;
-                justify-content: center;
-            }
-            
-            .about-content {
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-container,
+            .contact-container {
                 grid-template-columns: 1fr;
             }
             
+            .about-img {
+                order: -1;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background-color: white;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                transition: var(--transition);
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
             .hero h1 {
                 font-size: 2rem;
             }
             
-            .footer-content {
-                flex-direction: column;
+            .feature-card,
+            .service-card {
+                padding: 1.5rem;
+            }
+            
+            .contact-form {
+                padding: 2rem;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <header>
+    <!-- Header -->
+    <header id="header">
         <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">VOLTAGEM<span>ENERGIA</span></a>
-                <nav>
+            <div class="header-container">
+                <a href="#" class="logo">
+                    <i class="fas fa-bolt logo-icon"></i>
+                    <span>VOLTAGEM</span>
+                </a>
+                
+                <nav id="nav">
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#servicos">Serviços</a></li>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#contato">Contato</a></li>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#features">Soluções</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#contact">Contato</a></li>
                     </ul>
+                    <a href="#contact" class="nav-cta">Orçamento</a>
                 </nav>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero" id="home">
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-wind-turbines-in-the-wind-39745-large.mp4" type="video/mp4">
+        </video>
+        
         <div class="container">
-            <h1>Energia Sustentável e Soluções Integradas</h1>
-            <p>Especializada em geradores de energia eficientes, manutenção de motores de embarcações, construção civil sustentável e sistemas de refrigeração eco-friendly.</p>
-            <a href="#contato" class="btn">Solicite um Orçamento</a>
-        </div>
-    </section>
-
-    <section id="servicos">
-        <div class="container">
-            <h2 class="section-title">Nossos Serviços</h2>
-            <div class="services">
-                <div class="service-card">
-                    <i class="fas fa-solar-panel"></i>
-                    <h3>Geradores de Energia</h3>
-                    <p>Soluções em energia limpa e convencional, com instalação profissional e manutenção preventiva para máxima eficiência energética.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-ship"></i>
-                    <h3>Manutenção de Embarcações</h3>
-                    <p>Serviços especializados em motores marítimos com enfoque em redução de consumo e menor impacto ambiental.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-leaf"></i>
-                    <h3>Construção Civil Sustentável</h3>
-                    <p>Obras e reformas com materiais ecológicos e técnicas que priorizam a eficiência energética dos ambientes.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-fan"></i>
-                    <h3>Refrigeração Ecoeficiente</h3>
-                    <p>Sistemas de climatização com baixo consumo energético e utilização de gases refrigerantes ecológicos.</p>
+            <div class="hero-content fade-in">
+                <h1>Energia Inteligente para um Futuro Sustentável</h1>
+                <p>Soluções integradas em geração de energia, eficiência energética e manutenção especializada para residências, comércios e indústrias.</p>
+                <div class="hero-btns">
+                    <a href="#services" class="btn btn-primary">Nossos Serviços</a>
+                    <a href="#contact" class="btn btn-secondary">Fale Conosco</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="about" id="sobre">
+    <!-- Features Section -->
+    <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title">Sobre Nós</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>A <strong>Voltagem Energia</strong> nasceu da visão de unir eficiência energética e sustentabilidade. Somos referência no mercado por oferecer soluções que reduzem custos e impactos ambientais.</p>
-                    <p>Nossa equipe de engenheiros e técnicos especializados está sempre atualizada com as melhores práticas e tecnologias do setor energético.</p>
-                    <p>Atuamos com transparência e compromisso, garantindo que cada projeto atenda às necessidades específicas de nossos clientes enquanto promove o uso consciente de recursos.</p>
-                    <div style="margin-top: 2rem;">
-                        <a href="#contato" class="btn">Conheça Nossos Cases</a>
+            <div class="section-header fade-in">
+                <h2>Soluções Energéticas Integradas</h2>
+                <p>Oferecemos tecnologias avançadas e serviços especializados para atender todas as suas necessidades energéticas com eficiência e sustentabilidade.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-solar-panel"></i>
                     </div>
+                    <h3>Geração de Energia</h3>
+                    <p>Sistemas completos de geração energética, desde geradores convencionais até soluções renováveis como solar e eólica.</p>
                 </div>
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a7f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipe Voltagem Energia trabalhando">
+                
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Eficiência Energética</h3>
+                    <p>Diagnósticos e implementação de medidas para redução de consumo e otimização dos sistemas energéticos.</p>
+                </div>
+                
+                <div class="feature-card fade-in delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3>Manutenção Naval</h3>
+                    <p>Serviços especializados para motores e sistemas elétricos de embarcações, com tecnologia de ponta.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="contact" id="contato">
+    <!-- About Section -->
+    <section class="about" id="about">
         <div class="container">
-            <h2 class="section-title">Entre em Contato</h2>
-            <div class="contact-form">
-                <form>
-                    <div class="form-group">
-                        <label for="name">Nome Completo</label>
-                        <input type="text" id="name" required>
+            <div class="about-container">
+                <div class="about-content fade-in">
+                    <h2>25 Anos Energizando o Futuro</h2>
+                    <p>A Voltagem Energia surgiu em 1998 com a missão de revolucionar o setor energético através de soluções inteligentes e sustentáveis.</p>
+                    <p>Hoje, somos referência nacional em projetos complexos de infraestrutura energética, combinando know-how técnico com inovação constante.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Projetos Concluídos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Satisfação dos Clientes</div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Telefone</label>
-                        <input type="tel" id="phone" placeholder="(XX) XXXXX-XXXX">
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Serviço de Interesse</label>
-                        <select id="service" required>
-                            <option value="">Selecione um serviço</option>
-                            <option value="geradores">Geradores de Energia</option>
-                            <option value="embarcacoes">Manutenção de Embarcações</option>
-                            <option value="construcao">Construção Civil</option>
-                            <option value="refrigeracao">Refrigeração</option>
-                            <option value="outros">Outros</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Mensagem</label>
-                        <textarea id="message" required placeholder="Descreva sua necessidade..."></textarea>
-                    </div>
-                    <button type="submit" class="btn">Enviar Mensagem</button>
-                </form>
+                </div>
+                
+                <div class="about-img fade-in delay-1">
+                    <img src="https://images.unsplash.com/photo-1581093196276-1a6dd1f14a5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipe Voltagem Energia">
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Nossos Serviços Especializados</h2>
+                <p>Soluções completas desde o projeto até a manutenção contínua, garantindo eficiência e segurança energética.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Geradores de Energia">
+                    </div>
+                    <div class="service-content">
+                        <h3>Geradores de Energia</h3>
+                        <p>Instalação e manutenção de geradores de alta performance para todos os portes e necessidades.</p>
+                        <a href="#" class="service-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="service-card fade-in delay-1">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Manutenção Naval">
+                    </div>
+                    <div class="service-content">
+                        <h3>Manutenção Naval</h3>
+                        <p>Serviços especializados para motores e sistemas elétricos de embarcações comerciais e recreativas.</p>
+                        <a href="#" class="service-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="service-card fade-in delay-2">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Refrigeração Industrial">
+                    </div>
+                    <div class="service-content">
+                        <h3>Refrigeração Industrial</h3>
+                        <p>Sistemas de climatização e refrigeração para indústrias com máxima eficiência energética.</p>
+                        <a href="#" class="service-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-container fade-in">
+                <h2>Pronto para revolucionar sua infraestrutura energética?</h2>
+                <p>Nossa equipe de especialistas está pronta para desenvolver a solução perfeita para suas necessidades.</p>
+                <a href="#contact" class="btn btn-primary">Solicite uma Consultoria</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info fade-in">
+                    <h2>Entre em Contato</h2>
+                    <p>Tem dúvidas sobre nossos serviços ou precisa de um orçamento personalizado? Nossa equipe está pronta para ajudar.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Endereço</h4>
+                                <p>Av. das Energias, 1500 - Centro, São Paulo/SP</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Telefone</h4>
+                                <p>(11) 1234-5678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>contato@voltagemenergia.com.br</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form fade-in delay-1">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nome Completo</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Telefone</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Serviço de Interesse</label>
+                            <select id="service" required>
+                                <option value="">Selecione um serviço</option>
+                                <option value="geradores">Geradores de Energia</option>
+                                <option value="manutencao">Manutenção Naval</option>
+                                <option value="refrigeracao">Refrigeração Industrial</option>
+                                <option value="construcao">Construção Civil</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
+            <div class="footer-container">
+                <div class="footer-col">
                     <h3>Voltagem Energia</h3>
-                    <p>Energizando o futuro com soluções sustentáveis e eficientes para residências, comércios e indústrias.</p>
-                    <div style="margin-top: 1rem;">
-                        <a href="#" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Agende uma Visita</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Contato</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Av. das Energias, 1000 - Centro</p>
-                    <p><i class="fas fa-phone"></i> (XX) 1234-5678</p>
-                    <p><i class="fas fa-whatsapp"></i> (XX) 98765-4321</p>
-                    <p><i class="fas fa-envelope"></i> contato@voltagemenergia.com.br</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Redes Sociais</h3>
-                    <div class="social-icons">
+                    <p>Soluções energéticas inteligentes para um futuro sustentável e eficiente.</p>
+                    <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
-                    <h3 style="margin-top: 1.5rem;">Horário de Atendimento</h3>
-                    <p>Seg-Sex: 8h às 18h</p>
-                    <p>Sáb: 8h às 12h</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Serviços</h3>
+                    <div class="footer-links">
+                        <a href="#">Geradores de Energia</a>
+                        <a href="#">Manutenção Naval</a>
+                        <a href="#">Refrigeração Industrial</a>
+                        <a href="#">Construção Civil</a>
+                        <a href="#">Eficiência Energética</a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Links Úteis</h3>
+                    <div class="footer-links">
+                        <a href="#">Sobre Nós</a>
+                        <a href="#">Projetos</a>
+                        <a href="#">Clientes</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Carreiras</a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Assine nossa newsletter para receber novidades e conteúdos exclusivos.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
                 </div>
             </div>
-            <div class="copyright">
+            
+            <div class="footer-bottom">
                 <p>&copy; 2023 Voltagem Energia. Todos os direitos reservados.</p>
-                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Desenvolvido com ♥ por sua equipe de energia sustentável</p>
             </div>
         </div>
     </footer>
-</body>
-</html>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const nav = document.getElementById('nav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = nav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth Scrolling for Anchor
