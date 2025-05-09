@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voltagem Energia - Soluções em Energia e Manutenção</title>
+    <title>Voltagem Energia - Soluções em Energia Sustentável</title>
     <style>
         :root {
-            --primary: #003366;
-            --secondary: #FF6600;
-            --light: #F5F5F5;
-            --dark: #333333;
+            --primary: #006400; /* Verde escuro */
+            --secondary: #32CD32; /* Verde lima */
+            --accent: #228B22; /* Verde floresta */
+            --light: #F5FFF5; /* Verde muito claro */
+            --dark: #013220; /* Verde muito escuro */
         }
         
         * {
@@ -22,6 +23,7 @@
         body {
             color: var(--dark);
             line-height: 1.6;
+            background-color: var(--light);
         }
         
         header {
@@ -31,6 +33,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         .container {
@@ -70,14 +73,17 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
         }
         
         nav ul li a:hover {
             color: var(--secondary);
+            border-bottom: 2px solid var(--secondary);
         }
         
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0, 50, 0, 0.7), rgba(0, 50, 0, 0.7)), url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             color: white;
@@ -88,27 +94,33 @@
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
         
         .hero p {
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
         
         .btn {
             display: inline-block;
             background-color: var(--secondary);
-            color: white;
+            color: var(--dark);
             padding: 0.8rem 1.5rem;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            border: 2px solid transparent;
         }
         
         .btn:hover {
-            background-color: #e05d00;
+            background-color: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            transform: translateY(-3px);
         }
         
         section {
@@ -119,6 +131,16 @@
             text-align: center;
             margin-bottom: 3rem;
             color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 0.5rem auto 0;
         }
         
         .services {
@@ -128,22 +150,24 @@
         }
         
         .service-card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 1.5rem;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 100, 0, 0.1);
+            border-top: 4px solid var(--secondary);
         }
         
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 100, 0, 0.2);
         }
         
         .service-card i {
             font-size: 2.5rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         .service-card h3 {
@@ -152,7 +176,7 @@
         }
         
         .about {
-            background-color: var(--light);
+            background-color: white;
         }
         
         .about-content {
@@ -163,18 +187,24 @@
         }
         
         .about-img {
-            border-radius: 5px;
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
         .about-img img {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
         }
         
         .contact {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--dark));
             color: white;
         }
         
@@ -182,9 +212,17 @@
             color: white;
         }
         
+        .contact .section-title::after {
+            background-color: var(--secondary);
+        }
+        
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
         }
         
         .form-group {
@@ -194,25 +232,28 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
+            font-weight: 500;
         }
         
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 0.8rem;
             border: none;
             border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
         }
         
         .form-group textarea {
             height: 150px;
+            resize: vertical;
         }
         
         footer {
             background-color: var(--dark);
             color: white;
-            padding: 2rem 0;
-            text-align: center;
+            padding: 3rem 0 1rem;
         }
         
         .footer-content {
@@ -225,23 +266,44 @@
         .footer-section {
             flex: 1;
             min-width: 250px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
         }
         
         .footer-section h3 {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             color: var(--secondary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
         }
         
         .social-icons a {
+            display: inline-block;
             color: white;
             margin-right: 1rem;
             font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
         }
         
         .copyright {
-            border-top: 1px solid #444;
-            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            text-align: center;
         }
         
         @media (max-width: 768px) {
@@ -261,6 +323,10 @@
             
             .hero h1 {
                 font-size: 2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
             }
         }
     </style>
@@ -285,9 +351,9 @@
 
     <section class="hero" id="home">
         <div class="container">
-            <h1>Soluções Energéticas Completas</h1>
-            <p>Especializada em geradores de energia, manutenção de motores de embarcações, construção civil e refrigeração residencial e industrial.</p>
-            <a href="#contato" class="btn">Fale Conosco</a>
+            <h1>Energia Sustentável e Soluções Integradas</h1>
+            <p>Especializada em geradores de energia eficientes, manutenção de motores de embarcações, construção civil sustentável e sistemas de refrigeração eco-friendly.</p>
+            <a href="#contato" class="btn">Solicite um Orçamento</a>
         </div>
     </section>
 
@@ -296,24 +362,24 @@
             <h2 class="section-title">Nossos Serviços</h2>
             <div class="services">
                 <div class="service-card">
-                    <i class="fas fa-bolt"></i>
+                    <i class="fas fa-solar-panel"></i>
                     <h3>Geradores de Energia</h3>
-                    <p>Soluções completas em geradores elétricos para residências, comércios e indústrias, incluindo instalação e manutenção.</p>
+                    <p>Soluções em energia limpa e convencional, com instalação profissional e manutenção preventiva para máxima eficiência energética.</p>
                 </div>
                 <div class="service-card">
                     <i class="fas fa-ship"></i>
                     <h3>Manutenção de Embarcações</h3>
-                    <p>Serviços especializados em manutenção e reparo de motores de embarcações, garantindo segurança e desempenho.</p>
+                    <p>Serviços especializados em motores marítimos com enfoque em redução de consumo e menor impacto ambiental.</p>
                 </div>
                 <div class="service-card">
-                    <i class="fas fa-building"></i>
-                    <h3>Construção Civil</h3>
-                    <p>Execução de obras e reformas com qualidade e eficiência, atendendo às necessidades específicas de cada projeto.</p>
+                    <i class="fas fa-leaf"></i>
+                    <h3>Construção Civil Sustentável</h3>
+                    <p>Obras e reformas com materiais ecológicos e técnicas que priorizam a eficiência energética dos ambientes.</p>
                 </div>
                 <div class="service-card">
-                    <i class="fas fa-snowflake"></i>
-                    <h3>Refrigeração</h3>
-                    <p>Sistemas de refrigeração e climatização para ambientes residenciais e industriais, com projetos personalizados.</p>
+                    <i class="fas fa-fan"></i>
+                    <h3>Refrigeração Ecoeficiente</h3>
+                    <p>Sistemas de climatização com baixo consumo energético e utilização de gases refrigerantes ecológicos.</p>
                 </div>
             </div>
         </div>
@@ -324,12 +390,15 @@
             <h2 class="section-title">Sobre Nós</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>A Voltagem Energia é uma empresa comprometida com a excelência em soluções energéticas e serviços especializados. Com anos de experiência no mercado, nos destacamos pela qualidade dos nossos serviços e pelo atendimento personalizado.</p>
-                    <p>Nossa equipe é formada por profissionais altamente qualificados e capacitados para atender às mais diversas demandas, desde pequenos reparos até grandes projetos de infraestrutura.</p>
-                    <p>Valorizamos a transparência, a ética e o compromisso com nossos clientes, buscando sempre superar expectativas e entregar soluções que realmente façam a diferença.</p>
+                    <p>A <strong>Voltagem Energia</strong> nasceu da visão de unir eficiência energética e sustentabilidade. Somos referência no mercado por oferecer soluções que reduzem custos e impactos ambientais.</p>
+                    <p>Nossa equipe de engenheiros e técnicos especializados está sempre atualizada com as melhores práticas e tecnologias do setor energético.</p>
+                    <p>Atuamos com transparência e compromisso, garantindo que cada projeto atenda às necessidades específicas de nossos clientes enquanto promove o uso consciente de recursos.</p>
+                    <div style="margin-top: 2rem;">
+                        <a href="#contato" class="btn">Conheça Nossos Cases</a>
+                    </div>
                 </div>
                 <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipe Voltagem Energia">
+                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a7f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipe Voltagem Energia trabalhando">
                 </div>
             </div>
         </div>
@@ -341,7 +410,7 @@
             <div class="contact-form">
                 <form>
                     <div class="form-group">
-                        <label for="name">Nome</label>
+                        <label for="name">Nome Completo</label>
                         <input type="text" id="name" required>
                     </div>
                     <div class="form-group">
@@ -350,21 +419,22 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Telefone</label>
-                        <input type="tel" id="phone">
+                        <input type="tel" id="phone" placeholder="(XX) XXXXX-XXXX">
                     </div>
                     <div class="form-group">
                         <label for="service">Serviço de Interesse</label>
-                        <select id="service">
+                        <select id="service" required>
                             <option value="">Selecione um serviço</option>
                             <option value="geradores">Geradores de Energia</option>
                             <option value="embarcacoes">Manutenção de Embarcações</option>
                             <option value="construcao">Construção Civil</option>
                             <option value="refrigeracao">Refrigeração</option>
+                            <option value="outros">Outros</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="message">Mensagem</label>
-                        <textarea id="message" required></textarea>
+                        <textarea id="message" required placeholder="Descreva sua necessidade..."></textarea>
                     </div>
                     <button type="submit" class="btn">Enviar Mensagem</button>
                 </form>
@@ -377,26 +447,34 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Voltagem Energia</h3>
-                    <p>Soluções completas em energia e manutenção, atendendo com excelência desde 2019.</p>
+                    <p>Energizando o futuro com soluções sustentáveis e eficientes para residências, comércios e indústrias.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Agende uma Visita</a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h3>Contato</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Rua Energética, 123 - Centro</p>
-                    <p><i class="fas fa-phone"></i> (XX) XXXX-XXXX</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. das Energias, 1000 - Centro</p>
+                    <p><i class="fas fa-phone"></i> (XX) 1234-5678</p>
+                    <p><i class="fas fa-whatsapp"></i> (XX) 98765-4321</p>
                     <p><i class="fas fa-envelope"></i> contato@voltagemenergia.com.br</p>
                 </div>
                 <div class="footer-section">
                     <h3>Redes Sociais</h3>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
+                    <h3 style="margin-top: 1.5rem;">Horário de Atendimento</h3>
+                    <p>Seg-Sex: 8h às 18h</p>
+                    <p>Sáb: 8h às 12h</p>
                 </div>
             </div>
             <div class="copyright">
                 <p>&copy; 2023 Voltagem Energia. Todos os direitos reservados.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Desenvolvido com ♥ por sua equipe de energia sustentável</p>
             </div>
         </div>
     </footer>
